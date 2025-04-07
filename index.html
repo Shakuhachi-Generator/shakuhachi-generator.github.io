@@ -2,9 +2,39 @@
 <html>
 	<head>
 		<title>Shakuhachi Generator</title>
+		 <meta charset="UTF-8">
 		<script src="generator.js"></script>
 	</head>
 	<body>
+		<div id="settings">
+			<input type="radio" id="useRi" name="riOrHa" value="ri"         oninput="useRi()" ><label for="useRi"> ri</label>
+			<input type="radio" id="useHa" name="riOrHa" value="ha" checked oninput="useHa()"><label for="useHa"> ha</label><br>
+
+			<hr>
+
+			<input type="checkbox" id="katakanaNotation" checked oninput="updateKatakanaNotation()">
+			<label for="katakanaNotation"> Katakana jelölés</label><br>
+
+			<hr>
+
+			<label for="numberOfColumns">Oszlopok száma: </label>
+			<input type="number" id="numberOfColumns" min="1" max="10" value="8" oninput="updateNumberOfColumns()"><br>
+
+			<label for="numberOfBreaths">Lélegzetek száma (oszloponként): </label>
+			<input type="number" id="numberOfBreaths" min="1" max="10" value="2" oninput="updateNumberOfBreaths()"><br>
+
+			<label for="numberOfNotesPerBreath">Fogások száma (lélegzetenként): </label>
+			<input type="number" id="numberOfNotesPerBreath" min="1" max="10" value="4" oninput="updateNumberOfNotesPerBreath()"><br>
+
+			<label for="frequencyOfLongNotes">Hosszú hangok előfordulásának gyakorisága: </label>
+			<input type="range" id="frequencyOfLongNotes" min="0" max="100" value="50" oninput="updateLongNoteFrequencyValueLabel()">
+			<span id="longNoteFrequencyValue"></span><br>
+
+			<br>
+
+			<button onclick="generateRandomSheet()">Generálás</button>
+		</div>
+		<hr>
 		<table id="sheet-table"></table>
 	</body>
 </html>
