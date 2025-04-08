@@ -2,7 +2,41 @@
 <html>
 	<head>
 		<title>Shakuhachi Generator</title>
-		 <meta charset="UTF-8">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			#settings {
+				width: fit-content;
+				padding: 15px;
+				margin: auto;
+				border-style: solid;
+				border-radius: 25px;
+			}
+			#frequencyOfLongNotes {
+				width: 85%;
+				margin: 2px 0px;
+				transform: translateY(25%);
+			}
+			#longNoteFrequencyValue {
+				display: inline-block;
+				width: 13%;
+				text-align: right;
+			}
+			#separator {
+				/*border-style: dotted;*/
+				border: none;
+				padding-top: 20px;
+				background-image: radial-gradient(circle, black 20%, transparent 25%);
+				background-size: 20px 20px;
+				background-repeat: repeat-x;
+			}
+			#sheet-table {
+				width: fit-content;
+				margin: auto;
+				text-align: center;
+				border-spacing: 25px 0px;
+			}
+		</style>
 		<script src="generator.js"></script>
 	</head>
 	<body>
@@ -26,7 +60,7 @@
 			<label for="numberOfNotesPerBreath">Fogások száma (lélegzetenként): </label>
 			<input type="number" id="numberOfNotesPerBreath" min="1" max="10" value="4" oninput="updateNumberOfNotesPerBreath()"><br>
 
-			<label for="frequencyOfLongNotes">Hosszú hangok előfordulásának gyakorisága: </label>
+			<label for="frequencyOfLongNotes">Hosszú hangok előfordulásának gyakorisága:</label><br>
 			<input type="range" id="frequencyOfLongNotes" min="0" max="100" value="50" oninput="updateLongNoteFrequencyValueLabel()">
 			<span id="longNoteFrequencyValue"></span><br>
 
@@ -34,7 +68,7 @@
 
 			<button onclick="generateRandomSheet()">Generálás</button>
 		</div>
-		<hr>
+		<hr id="separator">
 		<table id="sheet-table"></table>
 	</body>
 </html>

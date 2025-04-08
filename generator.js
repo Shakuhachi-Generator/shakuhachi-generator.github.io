@@ -1,5 +1,7 @@
-var kari_katakana = ['\u30ED', '\u30C4', '\u30EC', '\u30C1', '\u30CF', '\u30A4'];
-var kari_romaji   = ["ro", "cu", "re", "csi", "ha", "i"]
+var kari_katakana   = ['\u30ED', '\u30C4', '\u30EC', '\u30C1', '\u30CF', '\u30A4'];
+var kari_romaji     = ["ro", "cu", "re", "csi", "ha", "i"];
+var longNoteSymbol  = '|';
+var breathEndSymbol = '\u2218';
 
 var useRiInsteadOfHa;
 var katakanaNotation;
@@ -59,9 +61,9 @@ function generateRandomSheet()
 			{
 				column.push(getRandomNote(notes));
 				if (Math.random() < (frequencyOfLongNotes / 100.0))
-					column.push('|');
+					column.push(longNoteSymbol);
 			}
-			column.push('-');
+			column.push(breathEndSymbol);
 		}
 		columns.push(column);
 		if (column.length > columns[longestColumn].length)
