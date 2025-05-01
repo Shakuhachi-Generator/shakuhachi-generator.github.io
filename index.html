@@ -4,6 +4,8 @@
 		<title>Shakuhachi Generator</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="color-scheme" content="only light">
+		<meta name="theme-color" content="#FFF5C6">
 		<style>
 			#settings {
 				width: fit-content;
@@ -80,6 +82,35 @@
 				cursor: pointer;
 			}
 
+			:root {
+				color-scheme: only light;
+			}
+			html {
+				color-scheme: only light;
+				data-theme: light;
+				background: #FFF8D6;
+				color: black;
+			}
+			#settings {
+				background: #FFF5C6;
+			}
+			@media (prefers-color-scheme: dark) {
+				html {
+					background: #FFF8D6;
+					color: black;
+				}
+				#settings {
+					background: #FFF5C6;
+				}
+			}
+			#generateButton {
+				border-style: solid;
+				border-width: 2px;
+				border-color: black;
+				background: blue;
+				color: white;
+				font-weight: bold;
+			}
 			/*
 			.spinner {
 				display: none;
@@ -144,7 +175,7 @@
 
 			<br>
 
-			<button onclick="generateRandomSheet()">Generálás</button>
+			<button id="generateButton" onclick="generateRandomSheet()">Generálás</button>
 		</div>
 		<hr id="separator">
 		<table id="sheet-table"></table>
