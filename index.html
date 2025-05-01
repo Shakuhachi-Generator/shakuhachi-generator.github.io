@@ -36,6 +36,69 @@
 				text-align: center;
 				border-spacing: 25px 0px;
 			}
+
+			.setting {
+				display: flex;
+				margin-bottom: 5px;
+			}
+			.setting label {
+				margin-right: auto;
+			}
+			.setting .spinner {
+				margin: 3px 3px 0px 3px;
+				width: 18px;
+				height: 18px;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border: none;
+				background: blue;
+				color: white;
+				font-weight: bold;
+			}
+			.setting .spinner-decrease {
+				padding-bottom: 4px;
+			}
+			.setting .spinner-increase {
+				padding-bottom: 2px;
+				padding-left: 5px;
+			}
+			input[type="number"] {
+				-webkit-appearance: textfield;
+				   -moz-appearance: textfield;
+						appearance: textfield;
+
+				text-align: right;
+				width: 20px;
+			}
+			input[type=number]::-webkit-inner-spin-button,
+			input[type=number]::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+			}
+			.spinner {
+				cursor: pointer;
+			}
+
+			/*
+			.spinner {
+				display: none;
+			}
+			@media (max-width: 600px) {
+				input[type="number"] {
+					-webkit-appearance: textfield;
+					   -moz-appearance: textfield;
+							appearance: textfield;
+				}
+				input[type=number]::-webkit-inner-spin-button,
+				input[type=number]::-webkit-outer-spin-button {
+					-webkit-appearance: none;
+				}
+				.spinner {
+					display: inline-block;
+				}
+			}
+			*/
 		</style>
 		<script src="generator.js"></script>
 	</head>
@@ -51,14 +114,29 @@
 
 			<hr>
 
+			<div class="setting">
 			<label for="numberOfColumns">Oszlopok száma: </label>
-			<input type="number" id="numberOfColumns" min="1" max="10" value="8" oninput="updateNumberOfColumns()"><br>
+			<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfColumns')">-</button>
+			<input type="number" id="numberOfColumns" min="1" max="10" value="8"
+				   onfocus="selectValue('numberOfColumns')" oninput="clampValue('numberOfColumns')">
+			<button class="spinner spinner-increase" onclick="increaseValue('numberOfColumns')">+</button>
+			</div>
 
+			<div class="setting">
 			<label for="numberOfBreaths">Lélegzetek száma (oszloponként): </label>
-			<input type="number" id="numberOfBreaths" min="1" max="10" value="2" oninput="updateNumberOfBreaths()"><br>
+			<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfBreaths')">-</button>
+			<input type="number" id="numberOfBreaths" min="1" max="10" value="2"
+				   onfocus="selectValue('numberOfBreaths')" oninput="clampValue('numberOfBreaths')">
+			<button class="spinner spinner-increase" onclick="increaseValue('numberOfBreaths')">+</button>
+			</div>
 
+			<div class="setting">
 			<label for="numberOfNotesPerBreath">Fogások száma (lélegzetenként): </label>
-			<input type="number" id="numberOfNotesPerBreath" min="1" max="10" value="4" oninput="updateNumberOfNotesPerBreath()"><br>
+			<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfNotesPerBreath')">-</button>
+			<input type="number" id="numberOfNotesPerBreath" min="1" max="10" value="4"
+				   onfocus="selectValue('numberOfNotesPerBreath')" oninput="clampValue('numberOfNotesPerBreath')">
+			<button class="spinner spinner-increase" onclick="increaseValue('numberOfNotesPerBreath')">+</button>
+			</div>
 
 			<label for="frequencyOfLongNotes">Hosszú hangok előfordulásának gyakorisága:</label><br>
 			<input type="range" id="frequencyOfLongNotes" min="0" max="100" value="50" oninput="updateLongNoteFrequencyValueLabel()">

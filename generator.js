@@ -3,34 +3,57 @@ var kari_romaji     = ["ro", "cu", "re", "csi", "ha", "i"];
 var longNoteSymbol  = '|';
 var breathEndSymbol = '\u2218';
 
-var useRiInsteadOfHa;
-var katakanaNotation;
-var numberOfColumns;
-var numberOfBreaths;
-var notesPerBreath;
-var frequencyOfLongNotes;
-
 function useRi() { kari_katakana[4] = '\u30EA'; kari_romaji[4] = "ri"; }
 function useHa() { kari_katakana[4] = '\u30CF'; kari_romaji[4] = "ha"; }
 
-function updateKatakanaNotation()       { katakanaNotation       = document.getElementById("katakanaNotation").checked;             }
-function updateNumberOfColumns()        { numberOfColumns        = document.getElementById("numberOfColumns").valueAsNumber;        }
-function updateNumberOfBreaths()        { numberOfBreaths        = document.getElementById("numberOfBreaths").valueAsNumber;        }
-function updateNumberOfNotesPerBreath() { numberOfNotesPerBreath = document.getElementById("numberOfNotesPerBreath").valueAsNumber; }
+function increaseValue(id)
+{
+	let element = document.getElementById(id);
+	let value   = Number(element.value);
+	let max     = Number(element.max)
+	if (value < max)
+	{
+		element.value = value + 1;
+	}
+}
+
+function decreaseValue(id)
+{
+	let element = document.getElementById(id);
+	let value   = Number(element.value);
+	let min     = Number(element.min)
+	if (value > min)
+	{
+		element.value = value - 1;
+	}
+}
+
+function clampValue(id)
+{
+	let element = document.getElementById(id);
+	let value   = Number(element.value);
+	let min     = Number(element.min)
+	let max     = Number(element.max)
+	if (value <= min)
+	{
+		element.value = min;
+	}
+	else if (value >= max)
+	{
+		element.value = max;
+	}
+}
+
+function selectValue(id) { document.getElementById(id).select(); }
 
 function updateLongNoteFrequencyValueLabel()
 {
-	frequencyOfLongNotes = document.getElementById('frequencyOfLongNotes').valueAsNumber;
+	let frequencyOfLongNotes   = document.getElementById('frequencyOfLongNotes').valueAsNumber;
 	document.getElementById('longNoteFrequencyValue').innerText = frequencyOfLongNotes + '%';
 }
 
 window.onload = () =>
 {
-	useRiInsteadOfHa = document.getElementById("useRi").checked;
-	updateKatakanaNotation();
-	updateNumberOfColumns();
-	updateNumberOfBreaths();
-	updateNumberOfNotesPerBreath();
 	updateLongNoteFrequencyValueLabel();
 }
 
@@ -42,6 +65,12 @@ function getRandomNote(notes)
 function generateRandomSheet()
 {
 	// Settings
+	let katakanaNotation       = document.getElementById("katakanaNotation").checked;
+	let numberOfColumns        = document.getElementById("numberOfColumns").valueAsNumber;
+	let numberOfBreaths        = document.getElementById("numberOfBreaths").valueAsNumber;
+	let numberOfNotesPerBreath = document.getElementById("numberOfNotesPerBreath").valueAsNumber;
+	let frequencyOfLongNotes   = document.getElementById('frequencyOfLongNotes').valueAsNumber;
+
 	let notes = [];
 
 	if (katakanaNotation)
