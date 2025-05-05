@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>Shakuhachi Generator</title>
+		<!-- Meta -->
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="color-scheme" content="only light">
@@ -11,172 +12,52 @@
 		<meta name="robots" content="noindex, notranslate">   <!-- TODO: replace 'noindex' with 'all' when the page is ready-->
 		<meta name='HandheldFriendly' content='True'>
 		<meta name="author" content="Kustos Balázs">
-		<style>
-			#settings {
-				width: fit-content;
-				padding: 15px;
-				margin: auto;
-				border-style: solid;
-				border-radius: 25px;
-			}
-			#frequencyOfLongNotes {
-				width: 85%;
-				margin: 2px 0px;
-				transform: translateY(25%);
-			}
-			#longNoteFrequencyValue {
-				display: inline-block;
-				width: 13%;
-				text-align: right;
-			}
-			#separator {
-				/*border-style: dotted;*/
-				border: none;
-				padding-top: 20px;
-				background-image: radial-gradient(circle, black 20%, transparent 25%);
-				background-size: 20px 20px;
-				background-repeat: repeat-x;
-			}
-			#sheet-table {
-				width: fit-content;
-				margin: auto;
-				text-align: center;
-				border-spacing: 25px 0px;
-			}
-
-			.setting {
-				display: flex;
-				margin-bottom: 5px;
-			}
-			.setting label {
-				margin-right: auto;
-			}
-			.setting .spinner {
-				margin: 3px 3px 0px 3px;
-				width: 18px;
-				height: 18px;
-				border-radius: 50%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				border: none;
-				background: blue;
-				color: white;
-				font-weight: bold;
-			}
-			.setting .spinner-decrease {
-				padding-bottom: 4px;
-			}
-			.setting .spinner-increase {
-				padding-bottom: 2px;
-				padding-left: 5px;
-			}
-			input[type="number"] {
-				-webkit-appearance: textfield;
-				   -moz-appearance: textfield;
-						appearance: textfield;
-
-				text-align: right;
-				width: 20px;
-			}
-			input[type=number]::-webkit-inner-spin-button,
-			input[type=number]::-webkit-outer-spin-button {
-				-webkit-appearance: none;
-			}
-			.spinner {
-				cursor: pointer;
-			}
-
-			:root {
-				color-scheme: only light;
-			}
-			html {
-				color-scheme: only light;
-				data-theme: light;
-				background: #FFF8D6;
-				color: black;
-			}
-			#settings {
-				background: #FFF5C6;
-			}
-			@media (prefers-color-scheme: dark) {
-				html {
-					background: #FFF8D6;
-					color: black;
-				}
-				#settings {
-					background: #FFF5C6;
-				}
-			}
-			#generateButton {
-				border-style: solid;
-				border-width: 2px;
-				border-color: black;
-				background: blue;
-				color: white;
-				font-weight: bold;
-			}
-			/*
-			.spinner {
-				display: none;
-			}
-			@media (max-width: 600px) {
-				input[type="number"] {
-					-webkit-appearance: textfield;
-					   -moz-appearance: textfield;
-							appearance: textfield;
-				}
-				input[type=number]::-webkit-inner-spin-button,
-				input[type=number]::-webkit-outer-spin-button {
-					-webkit-appearance: none;
-				}
-				.spinner {
-					display: inline-block;
-				}
-			}
-			*/
-		</style>
+		<!-- Style -->
+		<link rel="stylesheet" href="style.css">
+		<!-- Script -->
+		<script src="script.js"></script>
 		<script src="generator.js"></script>
 	</head>
 	<body>
 		<div id="settings">
-			<input type="radio" id="useRi" name="riOrHa" value="ri"         oninput="useRi()" ><label for="useRi"> ri</label>
-			<input type="radio" id="useHa" name="riOrHa" value="ha" checked oninput="useHa()"><label for="useHa"> ha</label><br>
+			<input type="radio" id="useRi" name="riOrHa" value="ri"         oninput="useRi()"> <label for="useRi">ri</label>
+			<input type="radio" id="useHa" name="riOrHa" value="ha" checked oninput="useHa()"> <label for="useHa">ha</label><br>
 
 			<hr>
 
-			<input type="checkbox" id="katakanaNotation" checked oninput="updateKatakanaNotation()">
-			<label for="katakanaNotation"> Katakana jelölés</label><br>
+			<input type="checkbox" id="katakanaNotation" checked><label for="katakanaNotation"> Katakana jelölés</label><br>
 
 			<hr>
 
 			<div class="setting">
-			<label for="numberOfColumns">Oszlopok száma: </label>
-			<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfColumns')">-</button>
-			<input type="number" id="numberOfColumns" min="1" max="10" value="8"
-				   onfocus="selectValue('numberOfColumns')" oninput="clampValue('numberOfColumns')">
-			<button class="spinner spinner-increase" onclick="increaseValue('numberOfColumns')">+</button>
+				<label for="numberOfColumns">Oszlopok száma: </label>
+				<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfColumns')">-</button>
+				<input type="number" id="numberOfColumns" min="1" max="10" value="8"
+					   onfocus="selectValue('numberOfColumns')" oninput="clampValue('numberOfColumns')">
+				<button class="spinner spinner-increase" onclick="increaseValue('numberOfColumns')">+</button>
 			</div>
 
 			<div class="setting">
-			<label for="numberOfBreaths">Lélegzetek száma (oszloponként): </label>
-			<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfBreaths')">-</button>
-			<input type="number" id="numberOfBreaths" min="1" max="10" value="2"
-				   onfocus="selectValue('numberOfBreaths')" oninput="clampValue('numberOfBreaths')">
-			<button class="spinner spinner-increase" onclick="increaseValue('numberOfBreaths')">+</button>
+				<label for="numberOfBreaths">Lélegzetek száma (oszloponként): </label>
+				<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfBreaths')">-</button>
+				<input type="number" id="numberOfBreaths" min="1" max="10" value="2"
+					   onfocus="selectValue('numberOfBreaths')" oninput="clampValue('numberOfBreaths')">
+				<button class="spinner spinner-increase" onclick="increaseValue('numberOfBreaths')">+</button>
 			</div>
 
 			<div class="setting">
-			<label for="numberOfNotesPerBreath">Fogások száma (lélegzetenként): </label>
-			<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfNotesPerBreath')">-</button>
-			<input type="number" id="numberOfNotesPerBreath" min="1" max="10" value="4"
-				   onfocus="selectValue('numberOfNotesPerBreath')" oninput="clampValue('numberOfNotesPerBreath')">
-			<button class="spinner spinner-increase" onclick="increaseValue('numberOfNotesPerBreath')">+</button>
+				<label for="numberOfNotesPerBreath">Fogások száma (lélegzetenként): </label>
+				<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfNotesPerBreath')">-</button>
+				<input type="number" id="numberOfNotesPerBreath" min="1" max="10" value="4"
+					   onfocus="selectValue('numberOfNotesPerBreath')" oninput="clampValue('numberOfNotesPerBreath')">
+				<button class="spinner spinner-increase" onclick="increaseValue('numberOfNotesPerBreath')">+</button>
 			</div>
 
-			<label for="frequencyOfLongNotes">Hosszú hangok előfordulásának gyakorisága:</label><br>
+			<label for="frequencyOfLongNotes">Hosszú hangok előfordulásának gyakorisága:</label>
+			<br>
 			<input type="range" id="frequencyOfLongNotes" min="0" max="100" value="50" oninput="updateLongNoteFrequencyValueLabel()">
-			<span id="longNoteFrequencyValue"></span><br>
+			<span id="longNoteFrequencyValue"></span>
+			<br>
 
 			<br>
 
