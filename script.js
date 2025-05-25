@@ -47,7 +47,24 @@ function updateLongNoteFrequencyValueLabel()
 	document.getElementById('longNoteFrequencyValue').innerText = frequencyOfLongNotes + '%';
 }
 
+var languageList = ["hun", "eng"]
+
+function changeLanguage(language)
+{
+	for (let i = 0; i < languageList.length; i++)
+	{
+		elements = document.getElementsByClassName("lang_"+languageList[i]);
+		if (language != languageList[i])
+			for (let j = 0; j < elements.length; j++)
+				elements[j].style.display = "none";
+		else
+			for (let j = 0; j < elements.length; j++)
+				elements[j].style.display = "";
+	}
+}
+
 window.onload = () =>
 {
+	changeLanguage("hun");
 	updateLongNoteFrequencyValueLabel();
 }

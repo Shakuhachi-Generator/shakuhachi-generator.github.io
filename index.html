@@ -19,18 +19,32 @@
 		<script src="generator.js"></script>
 	</head>
 	<body>
+		<div id="languageSelectors">
+			<div class="align-right"></div>
+			<div class="languageSelect" onclick="changeLanguage('hun')">&#x1F1ED&#x1F1FA</div>
+			<div class="languageSelect" onclick="changeLanguage('eng')">&#x1F1EC&#x1F1E7</div>
+		</div>
 		<div id="settings">
 			<input type="radio" id="useRi" name="riOrHa" value="ri"         oninput="useRi()"> <label for="useRi">ri</label>
 			<input type="radio" id="useHa" name="riOrHa" value="ha" checked oninput="useHa()"> <label for="useHa">ha</label><br>
 
 			<hr>
 
-			<input type="checkbox" id="katakanaNotation" checked><label for="katakanaNotation"> Katakana jelölés</label><br>
+			<input type="checkbox" id="katakanaNotation" checked>
+			<label for="katakanaNotation">
+				<span class="lang_hun">Katakana jelölés</span>
+				<span class="lang_eng">Katakana notation</span>
+			</label>
+			<br>
 
 			<hr>
 
 			<div class="setting">
-				<label for="numberOfColumns">Oszlopok száma: </label>
+				<label for="numberOfColumns">
+					<span class="lang_hun">Oszlopok száma: </span>
+					<span class="lang_eng">Number of columns: </span>
+				</label>
+				<div class="align-right"></div>
 				<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfColumns')">-</button>
 				<input type="number" id="numberOfColumns" min="1" max="10" value="8"
 					   onfocus="selectValue('numberOfColumns')" oninput="clampValue('numberOfColumns')">
@@ -38,7 +52,11 @@
 			</div>
 
 			<div class="setting">
-				<label for="numberOfBreaths">Lélegzetek száma (oszloponként): </label>
+				<label for="numberOfBreaths">
+					<span class="lang_hun">Lélegzetek száma (oszloponként): </span>
+					<span class="lang_eng">Number of breaths (per column): </span>
+				</label>
+				<div class="align-right"></div>
 				<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfBreaths')">-</button>
 				<input type="number" id="numberOfBreaths" min="1" max="10" value="2"
 					   onfocus="selectValue('numberOfBreaths')" oninput="clampValue('numberOfBreaths')">
@@ -46,14 +64,21 @@
 			</div>
 
 			<div class="setting">
-				<label for="numberOfNotesPerBreath">Fogások száma (lélegzetenként): </label>
+				<label for="numberOfNotesPerBreath">
+					<span class="lang_hun">Fogások száma (lélegzetenként): </span>
+					<span class="lang_eng">Number of fingerings (per breath): </span>
+				</label>
+				<div class="align-right"></div>
 				<button class="spinner spinner-decrease" onclick="decreaseValue('numberOfNotesPerBreath')">-</button>
 				<input type="number" id="numberOfNotesPerBreath" min="1" max="10" value="4"
 					   onfocus="selectValue('numberOfNotesPerBreath')" oninput="clampValue('numberOfNotesPerBreath')">
 				<button class="spinner spinner-increase" onclick="increaseValue('numberOfNotesPerBreath')">+</button>
 			</div>
 
-			<label for="frequencyOfLongNotes">Hosszú hangok előfordulásának gyakorisága:</label>
+			<label for="frequencyOfLongNotes">
+				<span class="lang_hun">Hosszú hangok előfordulásának gyakorisága: </span>
+				<span class="lang_eng">Frequency of long notes: </span>
+			</label>
 			<br>
 			<input type="range" id="frequencyOfLongNotes" min="0" max="100" value="50" oninput="updateLongNoteFrequencyValueLabel()">
 			<span id="longNoteFrequencyValue"></span>
@@ -61,7 +86,10 @@
 
 			<br>
 
-			<button id="generateButton" onclick="generateRandomSheet()">Generálás</button>
+			<button id="generateButton" onclick="generateRandomSheet()">
+				<span class="lang_hun">Generálás</span>
+				<span class="lang_eng">Generate</span>
+			</button>
 		</div>
 		<hr id="separator">
 		<table id="sheet-table"></table>

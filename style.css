@@ -11,6 +11,22 @@ html {
 	color: black;
 }
 
+.align-right {
+	display: flex;
+	margin-right: auto;
+}
+
+#languageSelectors {
+	display: flex;
+	margin-left: auto;
+}
+
+.languageSelect {
+	display: inline;
+	margin: 0px 2px;
+	cursor: pointer;
+}
+
 #settings {
 	background: #FFF5C6;
 }
@@ -49,11 +65,6 @@ html {
 	display: flex;
 	/* Make some space between them */
 	margin-bottom: 5px;
-}
-
-.setting label {
-	/* Push the values to the other side */
-	margin-right: auto;
 }
 
 /* Getting rid of the original spinner */
