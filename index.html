@@ -21,21 +21,72 @@
 	<body>
 		<div id="languageSelectors">
 			<div class="align-right"></div>
-			<div class="languageSelect" onclick="changeLanguage('hun')">&#x1F1ED&#x1F1FA</div>
-			<div class="languageSelect" onclick="changeLanguage('eng')">&#x1F1EC&#x1F1E7</div>
+			<div class="languageSelect" onclick="changeLanguage('hun')">&#x1F1ED;&#x1F1FA;</div>
+			<div class="languageSelect" onclick="changeLanguage('eng')">&#x1F1EC;&#x1F1E7;</div>
 		</div>
 		<div id="settings">
-			<input type="radio" id="useRi" name="riOrHa" value="ri"         oninput="useRi()"> <label for="useRi">ri</label>
-			<input type="radio" id="useHa" name="riOrHa" value="ha" checked oninput="useHa()"> <label for="useHa">ha</label><br>
+			<div id="notationLabel">
+				<span class="lang_hun">Jelölés:</span>
+				<span class="lang_eng">Notation:</span>
+			</div>
+			<input type="radio" id="useKatakana" name="notation" value="katakana" oninput="changeNoteDisplay('katakana')" checked> <label for="useKatakana">katakana</label>
+			<input type="radio" id="useRomaji"   name="notation" value="romaji"   oninput="changeNoteDisplay('romaji')"          > <label for="useRomaji"  >romaji</label>
+			<br>
+			<input type="radio" id="useRi" name="riOrHa" value="ri" oninput="changeRiHa('ri')"        > <label for="useRi">ri</label>
+			<input type="radio" id="useHa" name="riOrHa" value="ha" oninput="changeRiHa('ha')" checked> <label for="useHa">ha</label>
+			<br>
 
 			<hr>
 
-			<input type="checkbox" id="katakanaNotation" checked>
-			<label for="katakanaNotation">
-				<span class="lang_hun">Katakana jelölés</span>
-				<span class="lang_eng">Katakana notation</span>
-			</label>
-			<br>
+			<div id="fingerings">
+				<span class="lang_hun">Fogások:</span>
+				<span class="lang_eng">Fingerings:</span>
+			</div>
+
+			<div id="fingeringsKari" class="fingeringCategory">
+				<input type="checkbox" id="includeKari" oninput="toggleKariNotes(event)" checked> <label for="includeKari">kari</label>
+			</div>
+			<div id="fingeringsKariNotes" class="fingeringNotes">
+			<input type="checkbox" id="includeRo"  oninput="checkKari()" checked>
+				<label for="includeRo"><span class="note_romaji">ro</span><span class="note_katakana">&#x30ED;</span></label>
+			<input type="checkbox" id="includeCu"  oninput="checkKari()" checked>
+				<label for="includeCu"><span class="note_romaji">cu</span><span class="note_katakana">&#x30C4;</span></label>
+			<input type="checkbox" id="includeRe"  oninput="checkKari()" checked>
+				<label for="includeRe"><span class="note_romaji">re</span><span class="note_katakana">&#x30EC;</span></label>
+			<input type="checkbox" id="includeChi" oninput="checkKari()" checked>
+				<label for="includeChi">
+					<span class="note_romaji">
+						<span class="lang_hun">csi</span>
+						<span class="lang_eng">chi</span>
+					</span>
+					<span class="note_katakana">&#x30C1;</span>
+					</label>
+			<input type="checkbox" id="includeHa" oninput="checkKari()" checked>
+				<label for="includeHa">
+					<span class="note_romaji">
+						<span class="note_ri">ri</span>
+						<span class="note_ha">ha</span>
+					</span>
+					<span class="note_katakana">
+						<span class="note_ri">&#x30EA;</span>
+						<span class="note_ha">&#x30CF;</span>
+					</span>
+				</label>
+			<input type="checkbox" id="includeI" oninput="checkKari()" checked>
+				<label for="includeI"><span class="note_romaji">i</span><span class="note_katakana">&#x30A4;</span></label>
+			</div>
+
+			<div id="fingeringsMeri" class="fingeringCategory">
+				<input type="checkbox" id="includeMeri" oninput="toggleMeriNotes(event)" checked> <label for="includeMeri">meri</label>
+			</div>
+			<div id="fingeringsMeriNotes" class="fingeringNotes">
+			<input type="checkbox" id="includeRomeri" oninput="checkMeri()" checked>
+				<label for="includeRomeri"><span class="note_romaji">ro meri</span><span class="note_katakana romeri" style="padding-right:17px">&#x30ED;&#x30E1;</span></label>
+			<input type="checkbox" id="includeCumeri" oninput="checkMeri()" checked>
+				<label for="includeCumeri"><span class="note_romaji">cu meri</span><span class="note_katakana cumeri" style="padding-right:14px">&#x30C4;&#x30E1;</span></label>
+			<input type="checkbox" id="includeU"      oninput="checkMeri()" checked>
+				<label for="includeU"><span class="note_romaji">u</span><span class="note_katakana">&#x30A6;</span></label>
+			</div>
 
 			<hr>
 

@@ -1,10 +1,9 @@
 var kari_katakana   = ['\u30ED', '\u30C4', '\u30EC', '\u30C1', '\u30CF', '\u30A4'];
-var kari_romaji     = ["ro", "cu", "re", "csi", "ha", "i"];
+var kari_romaji     = ["ro", "cu", "re", "chi", "ha", "i"];
+var meri_katakana   = ['\u30ED\u30E1', '\u30C4\u30E1', '\u30A6'];
+var meri_romaji     = ["ro meri", "cu meri", "u"];
 var longNoteSymbol  = '|';
 var breathEndSymbol = '\u2218';
-
-function useRi() { kari_katakana[4] = '\u30EA'; kari_romaji[4] = "ri"; }
-function useHa() { kari_katakana[4] = '\u30CF'; kari_romaji[4] = "ha"; }
 
 function getRandomNote(notes)
 {
@@ -14,7 +13,6 @@ function getRandomNote(notes)
 function generateRandomSheet()
 {
 	// Settings
-	let katakanaNotation       = document.getElementById("katakanaNotation").checked;
 	let numberOfColumns        = document.getElementById("numberOfColumns").valueAsNumber;
 	let numberOfBreaths        = document.getElementById("numberOfBreaths").valueAsNumber;
 	let numberOfNotesPerBreath = document.getElementById("numberOfNotesPerBreath").valueAsNumber;
@@ -22,10 +20,41 @@ function generateRandomSheet()
 
 	let notes = [];
 
-	if (katakanaNotation)
-		notes = kari_katakana;
+	if (selectedLanguage == "hun")
+		kari_romaji[3] = "csi";
 	else
-		notes = kari_romaji;
+		kari_romaji[3] = "chi";
+
+	if (selectedRiHa == "ri")
+	{
+		kari_katakana[4] = '\u30EA';
+		kari_romaji[4] = "ri";
+	}
+	else
+	{
+		kari_katakana[4] = '\u30CF';
+		kari_romaji[4] = "ha";
+	}
+
+	if (selectedDisplayMode == "katakana")
+		notes = kari_katakana.concat(meri_katakana);
+	else
+		notes = kari_romaji.concat(meri_romaji);
+
+	let includes = [
+		document.getElementById("includeRo").checked,
+		document.getElementById("includeCu").checked,
+		document.getElementById("includeRe").checked,
+		document.getElementById("includeChi").checked,
+		document.getElementById("includeHa").checked,
+		document.getElementById("includeI").checked,
+		document.getElementById("includeRomeri").checked,
+		document.getElementById("includeCumeri").checked,
+		document.getElementById("includeU").checked
+	];
+	for (let i = includes.length - 1; i >= 0; --i)
+		if (includes[i] == false)
+			notes.splice(i,1);
 
 	// Generating the notes
 	let columns = [];
@@ -61,6 +90,10 @@ function generateRandomSheet()
 		{
 			let cell = document.createElement("td");
 			cell.innerText = columns[i][j];
+			if (cell.innerText == "\u30ED\u30E1")
+				cell.className = "romeri";
+			else if (cell.innerText == "\u30C4\u30E1")
+				cell.className = "cumeri";
 			rows[j].appendChild(cell);
 		}
 		// Empty cells for padding
