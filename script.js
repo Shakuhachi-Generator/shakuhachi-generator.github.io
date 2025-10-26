@@ -89,8 +89,13 @@ function selectValue(id)
 
 function updateLongNoteFrequencyValueLabel()
 {
-	let frequencyOfLongNotes = document.getElementById('frequencyOfLongNotes').valueAsNumber;
-	document.getElementById('longNoteFrequencyValue').innerText = frequencyOfLongNotes + '%';
+	let frequencyOfLongNotes = document.getElementById("frequencyOfLongNotes").valueAsNumber;
+	document.getElementById("longNoteFrequencyValue").innerText = frequencyOfLongNotes + '%';
+}
+
+function toggleSettingsWindow()
+{
+	document.getElementById("settings").classList.toggle("hidden");
 }
 
 const languageList = ["hun", "eng"];
